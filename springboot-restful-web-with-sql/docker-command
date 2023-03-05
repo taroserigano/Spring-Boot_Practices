@@ -1,0 +1,58 @@
+DOCKERIZE APP with SQL 
+
+
+1. docker pull mysql 
+
+2. CRETE NETWORK 
+
+docker network create spring-mysql-net 
+
+check networks: docker network ls 
+
+3. docker run --name mysqldb --netwrosk spring-mysql-net -e MYSQL_ROOT_PASSWORD=root -e MYSQL_DATABASE=employeedb  -d mysql  
+
+4. open bash 
+
+docker exec -it 4c60 bash 
+
+*check with SQL query in bash 
+
+
+
+-------------------------------------------
+
+1. docker build -t spring-rest-web . 
+
+*-t - tagging name 
+
+2. build another ocker build -t spring-rest-web:0.1.RELEASE . 
+
+3. RUN APP with SQL 
+
+docker run --netwrosk spring-mysql-net (network name) --name spring-mysql-container (provide container name) -p 8080:8080 (port number) 
+spring-rest-web (image name) 
+
+* -d (optional to run in the background) 
+
+4 CHECK LOGS
+
+docker logs -f (tail) 6ft3 (Docker ID name) 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
