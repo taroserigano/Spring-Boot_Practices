@@ -1,0 +1,24 @@
+@Transactional 
+
+-keep the data consistency 
+-if error occurs somewhere in the way, 
+-it will access the exception class, throw the error and, 
+-it'll take back to the originial state before the method was tiggered, like nothing was done. 
+
+.EX
+on method like placeOrder( orderReq) 
+
+
+orderRepository.save(orderReq)     <-- 2. once error thrown, this save date will be deleted.  
+
+if(orderReq.paymentType !=" "DEBIT") {
+throw new PaymentErrorException("this type is not accepted"_    <-- 1. Error thrown 
+} 
+
+paymentRepository.save(orderReq);  // <---- 3. this will not be triggered, 
+
+
+
+
+
+
