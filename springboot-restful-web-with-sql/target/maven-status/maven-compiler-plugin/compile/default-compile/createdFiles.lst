@@ -1,0 +1,6 @@
+net/javaguides/springboot/repository/UserRepository.class
+net/javaguides/springboot/SpringbootRestfulWebservicesApplication.class
+net/javaguides/springboot/service/UserService.class
+net/javaguides/springboot/controller/UserController.class
+net/javaguides/springboot/entity/User.class
+net/javaguides/springboot/service/impl/UserServiceImpl.class
