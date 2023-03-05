@@ -1,0 +1,103 @@
+
+
+
+1. search for Java Docker official image from the docker hub webstie 
+
+2. create Dockerfile:
+FROM eclipse-temurin:17
+
+LABEL mentainer="taroseri@gmail.com"
+
+WORKDIR /app
+
+COPY target/springboot-docker-demo-0.0.1-SNAPSHOT.jar /app/springboot-docker-demo.jar
+
+ENTRYPOINT ["java", "-jar", "springboot-docker-demo.jar"]
+
+
+3. build image - 
+docker build -t springboot-docker-demo . 
+
+4. check created docker image:
+docker images 
+
+
+5. create another image from the docker image  
+*0.1.RELEASE is the tag name 
+
+docker build -t springboot-docker-demo:0.1.RELEASE . 
+
+
+6. Run Docker 
+
+docker run -p 8081:8080 -d spring-docker-demo  <-- (port fo host operating system: port of docker container) 
+
+* -d - detached mode is to run docker in the background 
+ 
+7. LOG IN to docker account - 
+docker login 
+
+
+8. ADD TAG 
+docker tag springboot-docker-demo taroseri/spring-demo:0.1.RELEASE  
+
+9. PUSH DOCKER 
+
+docker images 
+docker push taroseri/spring-demo:0.1.RELEASE
+
+--COMPLETE
+
+1. PULL images form Docker hub 
+
+docker pull taroseri/spring-demo:0.1.RELEASE 
+
+images pulled onto docker pool 
+
+2. docker pull mysql:latest 
+
+
+
+<BASH COMMAND 
+
+docker exec -it localhost bash 
+
+1. mysql -u root -p 
+
+2. show databases; 
+
+
+
+
+
+docker logs 
+
+docker ps - to show info about dockers that are running 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
