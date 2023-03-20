@@ -17,6 +17,13 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+
+// webRequest.getDescription(true).
+
+// true will show user's information such as client id and false will just print URI.
+
+
+
 @ControllerAdvice
 public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
 
