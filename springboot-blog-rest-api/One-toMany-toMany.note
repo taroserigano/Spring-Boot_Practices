@@ -1,0 +1,65 @@
+
+
+Post.java 
+
+@OnetoMany(mappedBy = "post", cascade = CascadeType.ALL) 
+private Set<comment> comments = new HashSet<>(); 
+
+
+
+POST ---many--> Comments 
+
+
+Comment.java 
+
+
+// only fetch related entities from db
+// when you use relationship 
+@ManyToOne(fetch=FetchType.Lazy) 
+@JoinColumn(name="post_id") 
+private Post post; 
+
+
+
+POST.java
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "category_id")
+    private Category category;
+
+
+CATEGORY --many--> POST 
+
+
+
+Category.java 
+
+    @OneToMany(mappedBy = "category", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Post> posts;
+
+
+
+
+
+The orphanRemoval attribute is going to instruct the JPA provider to trigger a remove entity state transition when a PostComment entity is no longer referenced by its parent Post entity.
+
+
+
+Many-to-Many
+
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(name = "users_roles",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id")
+    )
+
+
+User <---> UserRoles <---> Roles 
+
+
+
+
+
+
+
