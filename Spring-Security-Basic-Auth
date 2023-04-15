@@ -11,6 +11,8 @@ BAIS AUTH
 
 - as you log in via above method, "Authorization - Basic veergfejvheuorh" will be generated in the header. 
 
+The httpBasic() method is used to enable the feature to authenticate the user during HTTP request. 
+
 What are we saying by calling httpBasic() ?
 When httpBasic() is called, we are telling Spring to authenticate the request using the values passed by the 
 Authorization request header. If the request is not authenticated you will get a returned status of 401 
