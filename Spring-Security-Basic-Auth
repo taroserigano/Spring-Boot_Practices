@@ -13,15 +13,15 @@ BAIS AUTH
 
 The httpBasic() method is used to enable the feature to authenticate the user during HTTP request. 
 
-What are we saying by calling httpBasic() ?
-When httpBasic() is called, we are telling Spring to authenticate the request using the values passed by the 
-Authorization request header. If the request is not authenticated you will get a returned status of 401 
-and a error message of Unauthorized
-What is actually happening when httpBasic() is called ?
-By calling httpBasic(), an instance of the BasicAuthenticationFilter is added to the filter chain. 
-The BasicAuthenticationFilter will then proceed with trying to authenticate the request in the typical 
-Spring Security fashion. If authentication is successful, the resulting Authentication 
-object will be placed into the SecurityContextHolder, which can then be used for future authentication purposes.
+In this topic, we will learn to use HTTP basic authentication in the Spring application. 
+Spring Security provides HTTP basic authentication to 
+authenticate the user at the client-side and send the user credentials with the request header
+to the server. The server receives these credentials, extract them from the header, and map them 
+with the existing record to validate the user.
+
+The BasicAuthenticationFilter handles the request and check whether the request contains an authentication 
+header or not. The httpBasic() method enables the Basic HTTP security in our application. Let's create a 
+project and implements HTTP security.
 
 CSRF Token 
 
