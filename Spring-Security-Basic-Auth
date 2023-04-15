@@ -11,6 +11,15 @@ BAIS AUTH
 
 - as you log in via above method, "Authorization - Basic veergfejvheuorh" will be generated in the header. 
 
+What are we saying by calling httpBasic() ?
+When httpBasic() is called, we are telling Spring to authenticate the request using the values passed by the 
+Authorization request header. If the request is not authenticated you will get a returned status of 401 
+and a error message of Unauthorized
+What is actually happening when httpBasic() is called ?
+By calling httpBasic(), an instance of the BasicAuthenticationFilter is added to the filter chain. 
+The BasicAuthenticationFilter will then proceed with trying to authenticate the request in the typical 
+Spring Security fashion. If authentication is successful, the resulting Authentication 
+object will be placed into the SecurityContextHolder, which can then be used for future authentication purposes.
 
 CSRF Token 
 
