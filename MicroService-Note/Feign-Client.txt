@@ -1,0 +1,47 @@
+Take in the Service from outside into Employee-Service 
+ 
+
+@FeignClient("DEPARTMENT-SERVICE")
+public interface APIClient {
+    // Build get department rest api
+    @GetMapping("api/departments/{department-code}")
+    DepartmentDto getDepartment(@PathVariable("department-code") String departmentCode);
+}
+
+
+2. get departmentDTO from the department Code 
+
+
+    @Override
+    public APIResponseDto getEmployeeById(Long employeeId) {
+
+        LOGGER.info("inside getEmployeeById() method");
+        Employee employee = employeeRepository.findById(employeeId).get();
+
+        
+        DepartmentDto departmentDto = apiClient.getDepartment(employee.getDepartmentCode());
+
+        EmployeeDto employeeDto = new EmployeeDto(
+                employee.getId(),
+                employee.getFirstName(),
+                employee.getLastName(),
+                employee.getEmail(),
+                employee.getDepartmentCode()
+        );
+
+        APIResponseDto apiResponseDto = new APIResponseDto();
+        apiResponseDto.setEmployee(employeeDto);
+        apiResponseDto.setDepartment(departmentDto);
+
+        return apiResponseDto;
+    }
+
+
+
+
+
+
+
+
+
+

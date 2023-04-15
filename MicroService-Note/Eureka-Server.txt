@@ -1,0 +1,39 @@
+add @EurekaServer 
+on main Application Class 
+
+
+spring.application.name=SERVICE-REGISTRY
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+
+
+@SpringBootApplication
+@EnableEurekaServer
+public class ServiceRegistryApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ServiceRegistryApplication.class, args);
+	}
+
+}
+
+
+
+
+Register other services as Eureka Clients 
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+

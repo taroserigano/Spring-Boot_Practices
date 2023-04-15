@@ -1,0 +1,71 @@
+add @EurekaServer 
+on main Application Class 
+
+
+spring.application.name=SERVICE-REGISTRY
+server.port=8761
+eureka.client.register-with-eureka=false
+eureka.client.fetch-registry=false
+
+
+
+@SpringBootApplication
+@EnableEurekaServer
+public class ServiceRegistryApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(ServiceRegistryApplication.class, args);
+	}
+
+}
+
+
+
+
+Register other services as Eureka Clients 
+
+ 
+
+#spring.datasource.url=jdbc:mysql://localhost:3306/department_db
+#spring.datasource.username=root
+#spring.datasource.password=Mysql@123
+
+#spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
+#spring.jpa.hibernate.ddl-auto=update
+
+
+
+spring.application.name=DEPARTMENT-SERVICE
+spring.config.import=optional:configserver:http://localhost:8888
+
+#eureka.instance.client.serverUrl.defaultZone=http://localhost:8761/eureka/
+
+
+
+
+
+@EnableEurekaClient
+public class DepartmentServiceApplication {
+
+	public static void main(String[] args) {
+		SpringApplication.run(DepartmentServiceApplication.class, args);
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

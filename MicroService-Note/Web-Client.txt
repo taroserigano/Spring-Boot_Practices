@@ -1,0 +1,28 @@
+    @Override
+    public APIResponseDto getEmployeeById(Long employeeId) {
+
+        LOGGER.info("inside getEmployeeById() method");
+        Employee employee = employeeRepository.findById(employeeId).get();
+
+
+        DepartmentDto departmentDto = webClient.get()
+                .uri("http://localhost:8080/api/departments/" + employee.getDepartmentCode())
+                .retrieve()
+                .bodyToMono(DepartmentDto.class)
+                .block();
+
+
+        EmployeeDto employeeDto = new EmployeeDto(
+                employee.getId(),
+                employee.getFirstName(),
+                employee.getLastName(),
+                employee.getEmail(),
+                employee.getDepartmentCode()
+        );
+
+        APIResponseDto apiResponseDto = new APIResponseDto();
+        apiResponseDto.setEmployee(employeeDto);
+        apiResponseDto.setDepartment(departmentDto);
+
+        return apiResponseDto;
+    }
