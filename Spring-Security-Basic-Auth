@@ -1,0 +1,74 @@
+
+SPRING SECURITY - master 3 min 
+
+Form Authentication 
+
+- will generate security password 
+- enter user and password in order to log in 
+
+
+BAIS AUTH 
+
+- as you log in via above method, "Authorization - Basic veergfejvheuorh" will be generated in the header. 
+
+
+CSRF Token 
+
+-@GetMapping("csrf-token") 
+public CsrfToken getCsrf(HttpServeltRequest req) { 
+return (CsrfToken) req.getAttribute("_csrf"); 
+}
+
+--this will return the csrf token, so pick it up 
+-- add header, X-CSRF-TOKEN 
+-- now you can make POST reqs and such 
+
+
+UserDetail Service - in Memory - save credentials 
+
+	@Bean
+	public UserDetailsService userDetailService(DataSource dataSource) {
+		
+		var user = User.withUsername("in28minutes")
+			//.password("{noop}dummy")
+			.password("dummy")
+			.passwordEncoder(str -> passwordEncoder().encode(str))
+			.roles("USER")
+			.build();
+		
+		var admin = User.withUsername("admin")
+				//.password("{noop}dummy")
+				.password("dummy")
+				.passwordEncoder(str -> passwordEncoder().encode(str))
+				.roles("ADMIN", "USER")
+				.build(); 
+		// save through JDBC 
+		var jdbcUserDetailsManager = new JdbcUserDetailsManager(dataSource);
+		jdbcUserDetailsManager.createUser(user);
+		jdbcUserDetailsManager.createUser(admin);
+
+		return jdbcUserDetailsManager;
+	}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
