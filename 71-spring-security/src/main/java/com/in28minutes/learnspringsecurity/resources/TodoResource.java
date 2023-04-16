@@ -30,9 +30,10 @@ public class TodoResource {
 	}
 
 	@GetMapping("/users/{username}/todos")
-	@PreAuthorize("hasRole('USER') and #username == authentication.name")
-	@PostAuthorize("returnObject.username == 'in28minutes'")
-	@RolesAllowed({"ADMIN", "USER"})
+	@PreAuthorize("hasRole('USER') and #username == authentication.name") // authentication is the one you login with 
+									      // username is the parameter 
+	@PostAuthorize("returnObject.username == 'in28minutes'")              // specifying only one user here 
+	@RolesAllowed({"ADMIN", "USER"})                                      
 	@Secured({"ROLE_ADMIN", "ROLE_USER"})
 	public Todo retrieveTodosForSpecificUser(@PathVariable String username) {
 		return TODOS_LIST.get(0);
