@@ -16,8 +16,16 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.provisioning.JdbcUserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
+// 1) The property prePostEnabled=true enables support for Spring’s @PreAuthorize and @PostAuthorize annotations. 
+// 	Hence, Spring will ignore this annotation unless you set the flag to true.
+// 2) The property securedEnabled=true enables support for the @Secured annotation. Hence, Spring will ignore this 
+// 	annotation unless you set the flag to true.
+// 3) The property jsr250Enabled=true enables support for the JSR-250 annotations. One of the most commonly used 
+// @RolesAllowed annotation comes under this. 
+// 	Hence, Spring will ignore these annotations unless you set the flag to true.
 
 @Configuration
+// supports @RolesAllowed and @Secured 
 @EnableMethodSecurity(jsr250Enabled = true, securedEnabled = true)
 public class BasicAuthSecurityConfiguration {
 	
@@ -37,6 +45,8 @@ public class BasicAuthSecurityConfiguration {
 						);
 		
 		//http.formLogin();
+		
+		// allows using header with this 
 		http.httpBasic();
 		
 		http.csrf().disable();
