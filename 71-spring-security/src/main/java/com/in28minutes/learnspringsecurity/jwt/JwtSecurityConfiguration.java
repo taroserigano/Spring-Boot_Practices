@@ -97,6 +97,7 @@ public class JwtSecurityConfiguration {
 		return new BCryptPasswordEncoder();
 	}
 	
+	// create a Key Pair object to use for RSAKey 
 	@Bean
 	public KeyPair keyPair() {
 		try {
@@ -117,7 +118,9 @@ public class JwtSecurityConfiguration {
 				.keyID(UUID.randomUUID().toString())
 				.build();
 	}
-
+        
+	// create JWK Source and JWT set (to be used for JWT authentication) 
+	// use for context management 
 	@Bean
 	public JWKSource<SecurityContext> jwkSource(RSAKey rsaKey) {
 		var jwkSet = new JWKSet(rsaKey);
