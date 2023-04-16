@@ -18,6 +18,8 @@ public class JwtAuthenticationResource {
 		this.jwtEncoder = jwtEncoder;
 	}
 	
+	// this will generate token 
+	// authentication is the information you logged in with 
 	@PostMapping("/authenticate") 
 	public JwtRespose authenticate(Authentication authentication) {
 		return new JwtRespose(createToken(authentication));
@@ -25,19 +27,20 @@ public class JwtAuthenticationResource {
 
 	private String createToken(Authentication authentication) {
 		var claims = JwtClaimsSet.builder()
-								.issuer("self")
+								.issuer("self") 
 								.issuedAt(Instant.now())
 								.expiresAt(Instant.now().plusSeconds(60 * 30))
-								.subject(authentication.getName())
-								.claim("scope", createScope(authentication))
-								.build();
+								.subject(authentication.getName()) // basically username 
+								.claim("scope", createScope(authentication)) // roles like ROLE_USER 
+								.build(); // create as Object 
 		
-		return jwtEncoder.encode(JwtEncoderParameters.from(claims))
-							.getTokenValue();
+		return jwtEncoder.encode(JwtEncoderParameters.from(claims))  // take the above claim, and
+							.getTokenValue();    // extract the value, encode and return 
 	}
 
-	private String createScope(Authentication authentication) {
-		return authentication.getAuthorities().stream()
+	private String createScope(Authentication authentication) { 
+		return authentication.getAuthorities().stream()   // get all the roles(authorities) from this user, 
+								  // (it's found in authentication info) 
 			.map(a -> a.getAuthority())
 			.collect(Collectors.joining(" "));			
 	}
