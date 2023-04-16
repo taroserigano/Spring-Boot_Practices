@@ -129,14 +129,17 @@ public class JwtSecurityConfiguration {
 		
 	}
 	
+	// decode the RSAKey 
 	@Bean
 	public JwtDecoder jwtDecoder(RSAKey rsaKey) throws JOSEException {
 		return NimbusJwtDecoder
+			// RSA Key contains public key 
 				.withPublicKey(rsaKey.toRSAPublicKey())
 				.build();
 		
 	}
 	
+	// encode the JWKSource 
 	@Bean
 	public JwtEncoder jwtEncoder(JWKSource<SecurityContext> jwkSource) {
 		return new NimbusJwtEncoder(jwkSource);
