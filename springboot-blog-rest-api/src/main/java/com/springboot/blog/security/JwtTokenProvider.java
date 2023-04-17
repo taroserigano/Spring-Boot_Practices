@@ -33,11 +33,13 @@ public class JwtTokenProvider {
                 .setSubject(username)
                 .setIssuedAt(new Date())
                 .setExpiration(expireDate)
+            // decode here, so that user can get raw token 
                 .signWith(key())
                 .compact();
         return token;
     }
-
+    
+    // decoder using JWT Secret key 
     private Key key(){
         return Keys.hmacShaKeyFor(
                 Decoders.BASE64.decode(jwtSecret)
@@ -46,12 +48,12 @@ public class JwtTokenProvider {
 
     // get username from Jwt token
     public String getUsername(String token){
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(key())
+        Claims claims = Jwts.parserBuilder()  // parse builder, 
+                .setSigningKey(key())          
                 .build()
-                .parseClaimsJws(token)
-                .getBody();
-        String username = claims.getSubject();
+                .parseClaimsJws(token)          // parse the claim 
+                .getBody();                     
+        String username = claims.getSubject();     // extract subject(which is an username) 
         return username;
     }
 
