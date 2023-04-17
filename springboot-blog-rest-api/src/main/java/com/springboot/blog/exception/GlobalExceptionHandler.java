@@ -32,7 +32,9 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> handleResourceNotFoundException(ResourceNotFoundException exception,
                                                                         WebRequest webRequest){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
-                webRequest.getDescription(false));
+                webRequest.getDescription(false)); // false because we're only sending the URL and Not the whole thing 
+        
+        
         return new ResponseEntity<>(errorDetails, HttpStatus.NOT_FOUND);
     }
 
@@ -40,7 +42,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> handleBlogAPIException(BlogAPIException exception,
                                                                         WebRequest webRequest){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
-                webRequest.getDescription(false));
+                webRequest.getDescription(false));  // false because we're only sending the URL and Not the whole thing 
         return new ResponseEntity<>(errorDetails, HttpStatus.BAD_REQUEST);
     }
     // global exceptions
@@ -48,7 +50,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> handleGlobalException(Exception exception,
                                                                WebRequest webRequest){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
-                webRequest.getDescription(false));
+                webRequest.getDescription(false));  // false because we're only sending the URL and Not the whole thing 
         return new ResponseEntity<>(errorDetails, HttpStatus.INTERNAL_SERVER_ERROR);
     }
 
@@ -83,7 +85,7 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     public ResponseEntity<ErrorDetails> handleAccessDeniedException(AccessDeniedException exception,
                                                                         WebRequest webRequest){
         ErrorDetails errorDetails = new ErrorDetails(new Date(), exception.getMessage(),
-                webRequest.getDescription(false));
+                webRequest.getDescription(false));  // false because we're only sending the URL and Not the whole thing 
         return new ResponseEntity<>(errorDetails, HttpStatus.UNAUTHORIZED);
     }
 }
