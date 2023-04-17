@@ -44,15 +44,18 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
             // load the user associated with token
             UserDetails userDetails = userDetailsService.loadUserByUsername(username);
             
-            // this will be generated when authorization is successful 
+            // generate auth-token using UserDetails and roles 
             UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
                 userDetails,
                 null,
                 userDetails.getAuthorities()
             );
-
+            
+            
+            // add request details to the auth-token 
             authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
-
+            
+            // add the auth-token to the security context 
             SecurityContextHolder.getContext().setAuthentication(authenticationToken);
 
         }
