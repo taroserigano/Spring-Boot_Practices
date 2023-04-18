@@ -1,0 +1,15 @@
+Spring DTO (object) - DAO(database) 
+
+Entity - for db 
+
+DTO - object 
+
+Mapper: 
+    @Override
+    public CategoryDto addCategory(CategoryDto categoryDto) {
+        Category category = modelMapper.map(categoryDto, Category.class);
+        Category savedCategory = categoryRepository.save(category);
+        return modelMapper.map(savedCategory, CategoryDto.class);
+    }
+
+
