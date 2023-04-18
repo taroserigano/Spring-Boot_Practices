@@ -60,9 +60,14 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
                                                                   HttpStatusCode status,
                                                                   WebRequest request) {
         Map<String, String> errors = new HashMap<>();
+        
+        // getBindingResult(): extract the bind result for default message. String errorResult = ex.getBindingResult().toString();
+        // extract error default messages -> each error msg 
         ex.getBindingResult().getAllErrors().forEach((error) ->{
+            // extract fieldname and error msg 
             String fieldName = ((FieldError)error).getField();
             String message = error.getDefaultMessage();
+            // and add them into Error hashMap 
             errors.put(fieldName, message);
         });
 
