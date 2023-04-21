@@ -1,0 +1,66 @@
+vegPizza implements Pizza
+normalPizza implements Pizza 
+cheesePizza implements Pizza
+
+
+
+@Qualifier 
+- you add on Controller in order to "specify" which bean to use like:
+
+PizzaController(@Qualifier("vegPizza") Pizza pizza) { 
+
+@Primary 
+
+-you add this to give priority over other beans 
+
+
+SCOPE 
+
+Singleton - only one instance can be created 
+
+Prototype - mutiple can be created 
+
+
+
+VALUE
+
+@Value("this will be printed") 
+private String valueStuff
+
+- can inject the value data
+- you can return valueStuff to show the value data 
+
+
+@Value("${user.email}")  <--- for properties.file 
+
+
+
+@ConfigurationPeoperties(prefix="app") 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
