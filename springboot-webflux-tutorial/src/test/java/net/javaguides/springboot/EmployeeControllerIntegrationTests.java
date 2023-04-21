@@ -69,6 +69,8 @@ public class EmployeeControllerIntegrationTests {
                 .expectBody()
                 .consumeWith(System.out::println)
                 .jsonPath("$.id").isEqualTo(savedEmployee.getId())
+            
+            // check if the output is equal to this JSON 
                 .jsonPath("$.firstName").isEqualTo(employeeDto.getFirstName())
                 .jsonPath("$.lastName").isEqualTo(employeeDto.getLastName())
                 .jsonPath("$.email").isEqualTo(employeeDto.getEmail());
