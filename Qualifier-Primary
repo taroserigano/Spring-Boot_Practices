@@ -1,0 +1,14 @@
+vegPizza implements Pizza
+normalPizza implements Pizza 
+cheesePizza implements Pizza
+
+
+
+@Qualifier 
+- you add on Controller in order to "specify" which bean to use like:
+
+PizzaController(@Qualifier("vegPizza") Pizza pizza) { 
+
+@Primary 
+
+-you add this to give priority over other beans 
